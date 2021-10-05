@@ -49,9 +49,17 @@ def get_users():
          users['users_list'].remove(userToAdd)
          resp = jsonify(success=True)
          resp.status_code = 204
+<<<<<<< HEAD
       except ValueError:
          resp = jsonify(success=False)
          resp.status_code = 404
+=======
+      
+      except ValueError:
+         resp = jsonify(success = False)
+         resp.status_code = 404
+      
+>>>>>>> 6d910c22a08f669f72cf20948ce293da58ff756d
       #resp.status_code = 200 #optionally, you can always set a response code. 
       # 200 is the default code for a normal response
       return resp
