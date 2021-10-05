@@ -34,7 +34,6 @@ def get_users():
       return users
    elif request.method == 'POST':
       userToAdd = request.get_json()
-      name = userToAdd['name']
       users['users_list'].append(userToAdd)
       id = randomIDGenerator()
       users['users_list'][-1]['id'] = id
@@ -44,9 +43,9 @@ def get_users():
       # 200 is the default code for a normal response
       return resp
    elif request.method == 'DELETE':
-      userToAdd = request.get_json()
+      userToDelete = request.get_json()
       try:
-         users['users_list'].remove(userToAdd)
+         users['users_list'].remove(userToDelete)
          resp = jsonify(success=True)
          resp.status_code = 204
       except ValueError:

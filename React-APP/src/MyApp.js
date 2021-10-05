@@ -19,15 +19,13 @@ function MyApp() {
     );  
 
 function removeOneCharacter (index) {
-  const updated = characters.filter((character, i) => {
+   makeDeleteCall(characters, index)
+
+   const updated = characters.filter((character, i) => {
       return i !== index
     });
     setCharacters(updated);
   
-  makeDeleteCall(characters, index).then( result => {
-      if (result)
-      console.log(result);
-      });
   }
 
   function updateList(person) { 
@@ -63,9 +61,9 @@ function removeOneCharacter (index) {
    async function makeDeleteCall(characters, index){
     try {
        const personURL = characters[index].id
-       const response = await axios.get('http://localhost:5000/users/'.concat(personURL));
-       return response.data.users_list;     
-    }
+       const response = await axios.delete('http://localhost:5000/users/'.concat(personURL));
+      return response
+   }
     catch (error){
        //We're not handling errors. Just logging into the console.
        console.log(error); 
