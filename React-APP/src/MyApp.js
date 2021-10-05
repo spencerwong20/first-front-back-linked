@@ -23,12 +23,17 @@ function removeOneCharacter (index) {
       return i !== index
     });
     setCharacters(updated);
+  
+  makeDeleteCall(characters, index).then( result => {
+      if (result)
+      console.log(result);
+      });
   }
 
   function updateList(person) { 
     makePostCall(person).then( result => {
     if (result)
-       setCharacters([...characters, person] );
+       setCharacters([...characters, result] );
     });
  }
   
@@ -54,6 +59,19 @@ function removeOneCharacter (index) {
        return false;
     }
  }
+
+   async function makeDeleteCall(characters, index){
+    try {
+       const personURL = characters[index].id
+       const response = await axios.get('http://localhost:5000/users/'.concat(personURL));
+       return response.data.users_list;     
+    }
+    catch (error){
+       //We're not handling errors. Just logging into the console.
+       console.log(error); 
+       return false;         
+    }
+  }
 
 }
 
